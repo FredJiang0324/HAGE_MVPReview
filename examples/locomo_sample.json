@@ -1,0 +1,59 @@
+{
+  "samples": [
+    {
+      "sample_id": 0,
+      "conversation": [
+        {
+          "speaker": "User",
+          "text": "I just moved to San Francisco last month from New York."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Welcome to San Francisco! That's quite a big move from the East Coast to the West Coast. How are you finding the city so far?"
+        },
+        {
+          "speaker": "User",
+          "text": "It's been great! I got a job at a tech startup here. The weather is much nicer than NYC."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "That's wonderful! The tech scene in San Francisco is vibrant. The weather is definitely one of the perks - much milder than New York's extremes."
+        },
+        {
+          "speaker": "User",
+          "text": "Yes, and I found a nice apartment in the Mission District. My commute is only 20 minutes by bike."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The Mission District is a great neighborhood with lots of character and excellent food options. A 20-minute bike commute is perfect for San Francisco!"
+        }
+      ],
+      "questions": [
+        {
+          "question": "Where did the user move from?",
+          "answer": "New York",
+          "category": 4,
+          "question_type": "single-hop"
+        },
+        {
+          "question": "What is the user's commute time to work?",
+          "answer": "20 minutes",
+          "category": 4,
+          "question_type": "single-hop"
+        },
+        {
+          "question": "What neighborhood does the user live in and how do they commute?",
+          "answer": "Mission District, by bike",
+          "category": 1,
+          "question_type": "multi-hop"
+        },
+        {
+          "question": "When did the user move to San Francisco?",
+          "answer": "last month",
+          "category": 2,
+          "question_type": "temporal"
+        }
+      ]
+    }
+  ]
+}

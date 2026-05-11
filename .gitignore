@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+.tex
+# Environment variables
+.env
+
+# Cache and data
+cache/
+locomo_trg_cache*/
+longmem_*_cache/
+hotpotqa_cache*/
+edge_score_cache/
+*.cache
+*.pkl
+*.pickle
+
+# Large datasets (download separately)
+data/hotpot_dev_distractor_v1.json
+data/longmemeval_s_cleaned.json
+
+# Results and logs
+results*/
+build_metrics*/
+logs*/
+*.log
+fixed_results_*.json
+rescored_results_*.json
+
+# Checkpoints
+checkpoints*/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Vector indices
+*.faiss
+*.npy
+*.npz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
