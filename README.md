@@ -1,66 +1,75 @@
-# HAGE: Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution
+<div align="center">
 
-**A weighted multi-relational memory framework with RL-driven graph traversal for long-horizon agentic reasoning.**
+# HAGE
 
-## Overview
+### Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution
 
-**HAGE** is a principled memory system for long-term conversation memory and multi-hop reasoning. HAGE represents memory across four orthogonal relational graphs — **Semantic, Temporal, Causal, and Entity** — and introduces a co-evolutionary training framework that jointly optimizes trainable edge features and a query-conditioned QueryRouter MLP via policy-gradient reinforcement learning.
+<small>A weighted multi-relational memory framework with RL-driven graph traversal for long-horizon agentic reasoning.</small>
 
-Key contributions:
-1. **Weighted Multi-Relational Memory Graph**: each edge carries a trainable feature vector initialized by LLM-based scoring (Phase 1) and refined by RL (Phase 2).
-2. **QueryRouter**: a 3-layer MLP that computes query-conditioned traversal scores without path-level supervision.
-3. **Co-evolutionary Training**: REINFORCE jointly optimizes edge features and the router on evidence-hit rewards with zero additional LLM calls during training.
+<br/>
 
-## Installation
+<p align="center">
+  <a href="https://arxiv.org/abs/2605.09942"><img src="https://img.shields.io/badge/arXiv-2605.09942-b31b1b?style=flat&labelColor=555&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="./HAGE_arxiv.pdf"><img src="https://img.shields.io/badge/Paper-PDF-EF4444?style=flat&labelColor=555" alt="Paper PDF"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2EA44F?style=flat&labelColor=555" alt="License"></a>
+  <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat&labelColor=555&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-ee4c2c?style=flat&labelColor=555&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat&labelColor=555" alt="PRs Welcome">
+</p>
 
-### Prerequisites
+[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📦 Installation](#-installation) • [📚 Datasets](#-datasets) • [⚙️ Configuration](#-configuration) • [📁 Project Structure](#-project-structure) • [📈 Evaluation](#-evaluation) • [📝 Citation](#-citation)
 
-- Python 3.9 or higher
-- Virtual environment (recommended)
+</div>
 
-### Setup
+<br/>
 
-1. Clone the repository:
-```bash
-git clone [repository-url]
-cd [repository-name]
-```
+---
 
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+## 🌟 Overview
 
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+**HAGE** is a principled memory system for long-term conversation memory and multi-hop reasoning. It represents memory across **four orthogonal relational graphs** — **Semantic**, **Temporal**, **Causal**, and **Entity** — and introduces a co-evolutionary training framework that jointly optimizes trainable edge features and a query-conditioned **QueryRouter** MLP via policy-gradient reinforcement learning.
 
-4. Set up environment variables:
-```bash
-cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
-```
+<table>
+<tr>
+<td width="33%" align="center">
 
-## Quick Start
+### 🕸️ Weighted Multi-Relational Graph
+Each edge carries a **trainable feature vector**, initialized by LLM-based scoring (Phase 1) and refined by RL (Phase 2).
 
-### Testing with LoCoMo Dataset
+</td>
+<td width="33%" align="center">
+
+### 🧭 QueryRouter
+A 3-layer MLP that computes **query-conditioned traversal scores** without path-level supervision.
+
+</td>
+<td width="33%" align="center">
+
+### 🔄 Co-evolutionary Training
+**REINFORCE** jointly optimizes edge features and the router on evidence-hit rewards with **zero extra LLM calls** during training.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Quick Start
+
+### 📖 LoCoMo (Long Conversation Memory)
 
 ```bash
 # Test on LoCoMo dataset (10 samples included)
 python test_fixed_memory.py --sample 0 --model gpt-4o-mini --max-questions 10 --category-to-test 1,2,3,4,5
 
 # Test specific question categories
-python test_fixed_memory.py --sample 0 --category-to-test 1  # Multi-hop only
+python test_fixed_memory.py --sample 0 --category-to-test 1   # Multi-hop only
 
 # Test multiple samples
 python test_fixed_memory.py --sample 0 1 2 --max-questions 50
-
-# Full dataset path: data/locomo10.json
 ```
 
-### Testing with HotpotQA Dataset
+### 🔍 HotpotQA (Multi-hop QA)
 
 ```bash
 # Test on HotpotQA multi-hop questions
@@ -70,30 +79,53 @@ python test_hotpotqa.py --dataset data/hotpot_dev_distractor_v1.json --num-quest
 python test_hotpotqa.py --num-questions 100 --parallel 10 --best-of-n 3
 ```
 
-### RL Training (Phase 2)
+### 🎯 RL Training (Phase 2)
 
 ```bash
 # Train QueryRouter and edge features via REINFORCE
 python train_rl_edge_scorer.py --dataset data/locomo10.json --epochs 100 --lr 1e-3
 ```
 
-### 5-Fold Cross-Validation
+### 📊 5-Fold Cross-Validation
 
 ```bash
-# Run full 5-fold evaluation
 python scripts/run_5fold_cv.py --dataset data/locomo10.json --model gpt-4o-mini
 ```
 
-## Datasets
+---
 
-### 1. LoCoMo (Long Conversation Memory) — `data/locomo10.json`
-- 10 conversation samples with extensive Q&A pairs
-- 5 question categories: Multi-hop, Temporal, Open-domain, Single-hop, Adversarial
-- **Status**: Included in repository (2.7MB)
+## 📦 Installation
 
-### 2. HotpotQA — `data/hotpot_dev_distractor_v1.json`
-- Multi-hop QA over 10 documents per question including distractors (7,405 dev questions)
-- **Status**: Download from HuggingFace
+**Prerequisites:** Python 3.9+, a virtual environment (recommended), and an OpenAI-compatible API key.
+
+```bash
+# 1. Clone
+git clone <repository-url>
+cd HAGE
+
+# 2. Create & activate a virtual environment
+python -m venv venv
+source venv/bin/activate            # Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Configure environment variables
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+```
+
+---
+
+## 📚 Datasets
+
+| Dataset | Path | Description | Status |
+|:--------|:-----|:------------|:------:|
+| **LoCoMo** | `data/locomo10.json` | 10 long conversations with Q&A across 5 categories (Multi-hop, Temporal, Open-domain, Single-hop, Adversarial). | ✅ Included (2.7 MB) |
+| **HotpotQA** | `data/hotpot_dev_distractor_v1.json` | Multi-hop QA over 10 documents per question with distractors (7,405 dev questions). | ⬇️ Download |
+
+<details>
+<summary><b>Download HotpotQA</b></summary>
 
 ```bash
 mkdir -p data/ && cd data/
@@ -101,26 +133,37 @@ wget https://huggingface.co/datasets/hotpot_qa/resolve/main/hotpot_dev_distracto
 cd ..
 ```
 
-## Configuration
+</details>
+
+---
+
+## ⚙️ Configuration
 
 ### Embedding Models
 
-- **MiniLM** (default): Fast, offline, 384-dimensional embeddings
-- **OpenAI**: Higher quality, requires API key, 1536-dimensional embeddings
+| Model | Dimensions | Notes |
+|:------|:----------:|:------|
+| **MiniLM** (default) | 384 | Fast, offline |
+| **OpenAI** | 1536 | Higher quality, requires API key |
 
 ```bash
-python test_fixed_memory.py --embedding-model minilm   # default
+python test_fixed_memory.py --embedding-model minilm    # default
 python test_fixed_memory.py --embedding-model openai
 ```
 
 ### Supported LLM Backends
 
-- `gpt-4o-mini` (default)
+- `gpt-4o-mini` *(default)*
 - `gpt-4.1-mini`
 - `gpt-4o`
-- Local models via compatible API (see `.env.example`)
+- Local models via OpenAI-compatible API — see `.env.example`
 
-## File Structure
+---
+
+## 📁 Project Structure
+
+<details>
+<summary><b>Click to expand</b></summary>
 
 ```
 HAGE/
@@ -155,7 +198,7 @@ HAGE/
 │   └── measure_efficiency.py     # System efficiency measurement
 ├── data/                         # Datasets
 │   ├── locomo10.json             # LoCoMo (included)
-│   ├── hotpot_dev_distractor_v1.json  # HotpotQA (download required)
+│   ├── hotpot_dev_distractor_v1.json   # HotpotQA (download required)
 │   └── README.md                 # Dataset download instructions
 ├── examples/                     # Sample data for quick testing
 │   └── locomo_sample.json
@@ -166,13 +209,39 @@ HAGE/
 └── .env.example
 ```
 
-## Evaluation Metrics
+</details>
 
-- **Exact Match**: Binary correctness
-- **F1 Score**: Token-level overlap (0–100%)
-- **BLEU Score**: N-gram similarity (0–100%)
-- **LLM Judge**: GPT-based semantic evaluation (0–100%)
+---
 
-## License
+## 📈 Evaluation
 
-MIT License — see LICENSE file for details.
+| Metric | Range | What it measures |
+|:-------|:-----:|:-----------------|
+| **Exact Match** | 0 / 1 | Binary correctness |
+| **F1 Score** | 0–100% | Token-level overlap |
+| **BLEU** | 0–100% | N-gram similarity |
+| **LLM Judge** | 0–100% | GPT-based semantic evaluation |
+
+---
+
+## 📝 Citation
+
+If you find HAGE useful in your research, please consider citing:
+
+```bibtex
+@misc{jiang2026hageharnessingagenticmemory,
+      title={HAGE: Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution},
+      author={Dongming Jiang and Yi Li and Guanpeng Li and Qiannan Li and Bingzhe Li},
+      year={2026},
+      eprint={2605.09942},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.09942},
+}
+```
+
+---
+
+## 📄 License
+
+Released under the [MIT License](./LICENSE).
