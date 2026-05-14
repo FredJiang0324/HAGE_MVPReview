@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2605.09942"><img src="https://img.shields.io/badge/arXiv-2605.09942-b31b1b?style=flat&labelColor=555&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://huggingface.co/papers/2605.09942"><img src="https://img.shields.io/badge/🤗-HuggingFace-FFD21E?style=flat&labelColor=555" alt="Hugging Face"></a>
   <a href="./HAGE_arxiv.pdf"><img src="https://img.shields.io/badge/Paper-PDF-EF4444?style=flat&labelColor=555" alt="Paper PDF"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2EA44F?style=flat&labelColor=555" alt="License"></a>
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat&labelColor=555&logo=python&logoColor=white" alt="Python">
