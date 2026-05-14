@@ -230,14 +230,11 @@ HAGE/
 If you find HAGE useful in your research, please consider citing:
 
 ```bibtex
-@misc{jiang2026hageharnessingagenticmemory,
-      title={HAGE: Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution},
-      author={Dongming Jiang and Yi Li and Guanpeng Li and Qiannan Li and Bingzhe Li},
-      year={2026},
-      eprint={2605.09942},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2605.09942},
+@article{jiang2026hage,
+  title={HAGE: Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution},
+  author={Jiang, Dongming and Li, Yi and Li, Guanpeng and Li, Qiannan and Li, Bingzhe},
+  journal={arXiv preprint arXiv:2605.09942},
+  year={2026}
 }
 ```
 
