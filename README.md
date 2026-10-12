@@ -73,7 +73,7 @@ python test_fixed_memory.py --sample 0 1 2 --max-questions 50
 ### 🔍 HotpotQA (Multi-hop QA)
 
 ```bash
-# Test on HotpotQA multi-hop questions
+# Test on HotpotQA multihop questions
 python test_hotpotqa.py --dataset data/hotpot_dev_distractor_v1.json --num-questions 100 --model gpt-4o-mini
 
 # Parallel evaluation
